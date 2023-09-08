@@ -21,7 +21,7 @@ body{
     padding: 0;
     box-sizing: border-box;
 
-    font-family: 'Courier New', Courier, monospace;
+    font-family:Georgia, 'Times New Roman', Times, serif;
     color: var(--letters-color);
 
 
@@ -56,7 +56,7 @@ img{
     margin-top: 5rem;
 
     padding: 1rem;
-
+    margin-bottom: 5rem;
 }
 
 .product{
@@ -81,11 +81,14 @@ img{
     padding: 1rem;
 
     span{
-        
         font-size: .8rem;
         color: var(--letters-ccc);
     }
-        
+    
+
+    h4{
+        min-height: 40px;
+    }
 }
 
 .product__img{
@@ -175,6 +178,7 @@ header{
     display: grid;
     grid-template-columns: 2fr 1fr;
     place-items: center;
+    padding: 2rem;
 
     height: 800px;
 }
@@ -208,11 +212,15 @@ header{
 
 .presentation__img{
     background-color: var(--bg--compl);
-    height: 800px;
+    height: 750px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.presentation__img img{
+    min-width: 150px;
 }
 
 
@@ -246,6 +254,12 @@ header{
 .cart__show{
     left: 0%;
 }
+
+
+
+
+
+
 
 /* Footer */
 
@@ -298,3 +312,70 @@ footer{
     }
 }
 
+/* CARRITO DE COMPRAS */
+
+.carrito{
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 3000;
+
+    height: 100vh;
+    width: 400px;
+    background-color:var(--bg--products);
+
+    top: 100%;
+    transition: top 0.3s;
+
+    overflow-y: scroll;
+}
+
+.carrito__show{
+    top: 0%;
+}
+
+@media (max-width: 600px) {
+    .carrito{
+        width: 100%;
+    }
+}
+
+
+
+.carrito__products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.carrito__product{
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 1rem;
+    border: 1px solid var(--bg--compl);
+
+}
+
+
+
+.carrito__product--img{
+    width: 40%;
+}
+
+.carrito__product--info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .2rem;
+    width: 60%;
+}
+
+
+.carrito__icons{
+    display: flex;
+    gap: .5rem;
+}
