@@ -70,6 +70,13 @@ function iconsEvent(){
     cart_icon.addEventListener('click', () => {
         carrito.classList.toggle('carrito__show')
     })
+
+
+    carrito.addEventListener('click', (e) =>{
+        if (e.target.classList.contains('bxs-arrow-from-left')){
+            carrito.classList.remove('carrito__show')
+        }
+    })
 }
 
 function addCarrito(db) {
@@ -99,14 +106,6 @@ function addCarrito(db) {
 
 
 function drawCarrito(db){
-
-    const carrito= document.querySelector('.carrito')
-
-    carrito.addEventListener('click', (e) =>{
-        if (e.target.classList.contains('bxs-arrow-from-left')){
-            carrito.classList.remove('carrito__show')
-        }
-    })
 
     const carritoProducts= document.querySelector('.carrito__products')
 
@@ -138,6 +137,16 @@ function drawCarrito(db){
     }
 
     carritoProducts.innerHTML= html
+}
+
+
+function darkMode() {
+    
+    const bxsmoon= document.querySelector('.bxs-moon');
+
+    bxsmoon.addEventListener('click', () => {
+        
+    })
 }
 
 

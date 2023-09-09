@@ -11,6 +11,10 @@
     --max-W: 1000px
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body{
     background-color: var(--bg-color);
 
@@ -31,6 +35,7 @@ body{
 a{
     text-decoration: none;
     color: inherit;
+    transition: all 0.5s ease;
 }
 
 img{
@@ -67,11 +72,10 @@ img{
     background-color: var(--bg--products);
     border-radius: 1rem;
     
-
-
     box-shadow: 1px 5px 13px 10px rgba(0,0,0,0.3);
     -webkit-box-shadow: 1px 5px 13px 10px rgba(0,0,0,0.3);
     -moz-box-shadow: 1px 5px 13px 10px rgba(0,0,0,0.3);
+
 }
 
 .product__info{
@@ -95,12 +99,30 @@ img{
     background-color: rgba(0, 0, 0, 0.6);
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    
+    position: relative;
+
+}
+
+.product__img .bx-plus{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 
 
-    .bx-plus{
-        padding: 10px;
-        border-radius: 10px;
-    }
+    background-color: var(--bg--compl);
+    color: #000;
+    border-radius: 1rem;
+    font-size: 1.8rem;
+
+    transition: background-color 0.3s,  color 0.3s, transform 0.3s;
+}
+
+.product__img .bx-plus:hover{
+    background-color: var(--footer-bg);
+    color: var(--bg--compl);
+
+    transform: translateY(-10px)
 }
 
 
@@ -175,6 +197,7 @@ header{
 }
 
 
+
 /* MAIN */
 
 .presentation{
@@ -223,6 +246,13 @@ header{
     cursor: pointer;
 
     margin-bottom: 1rem;
+
+    transition: background-color 0.3s ;
+}
+
+.btn__showmore:hover{
+    background-color: var(--bg--compl);
+    color: #000;
 }
 
 .presentation__img{
@@ -370,6 +400,7 @@ footer{
     justify-content: center;
     gap: 1rem;
     padding: 2rem;
+
 }
 
 .carrito__product{
@@ -380,6 +411,15 @@ footer{
     border-radius: 1rem;
     border: 1px solid var(--bg--compl);
 
+    height: 75%;
+
+    
+}
+
+.carrito__price{
+    height: 15%;
+    background-color: red;
+    
 }
 
 
@@ -395,6 +435,8 @@ footer{
     gap: .2rem;
     width: 60%;
 }
+
+
 
 
 .carrito__icons{
