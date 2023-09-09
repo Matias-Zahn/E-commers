@@ -181,7 +181,6 @@ header{
     display: grid;
     grid-template-columns: 1fr ;
     place-items: center;
-    padding: 2rem;
     width: 90%;
     margin-top: 5rem;
 }
