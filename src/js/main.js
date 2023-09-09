@@ -40,27 +40,6 @@ function paintProducts(db){
     productsHTML.innerHTML= html
 }
 
-
-
-
-async function main(){
-
-    const db= {
-        products: JSON.parse(window.localStorage.getItem('products')) || (await getElements()),
-        cart: JSON.parse(window.localStorage.getItem('cart')) || {},
-
-    };
-    
-    paintProducts(db)
-    cartShow()
-    iconsEvent()
-    addCarrito(db)
-    drawCarrito(db)
-}
-
-main()
-
-
 function cartShow() {
     const cartShow= document.querySelector('.bx-menu');
     const cart= document.querySelector('.cart');
@@ -69,6 +48,15 @@ function cartShow() {
 
         cart.classList.add('cart__show')
 
+        cart.addEventListener('click', (e) =>{
+            if(e.target.classList.contains('home__a') || e.target.classList.contains('productos__a')){
+                cart.classList.remove('cart__show')
+            }
+
+            if(e.target.classList.contains('bxs-arrow-from-left')){
+                cart.classList.remove('cart__show')
+            }
+        })
     })
 
 }
@@ -112,6 +100,14 @@ function addCarrito(db) {
 
 function drawCarrito(db){
 
+    const carrito= document.querySelector('.carrito')
+
+    carrito.addEventListener('click', (e) =>{
+        if (e.target.classList.contains('bxs-arrow-from-left')){
+            carrito.classList.remove('carrito__show')
+        }
+    })
+
     const carritoProducts= document.querySelector('.carrito__products')
 
     let html= '';
@@ -143,3 +139,22 @@ function drawCarrito(db){
 
     carritoProducts.innerHTML= html
 }
+
+
+async function main(){
+
+    const db= {
+        products: JSON.parse(window.localStorage.getItem('products')) || (await getElements()),
+        cart: JSON.parse(window.localStorage.getItem('cart')) || {},
+
+    };
+    
+    paintProducts(db)
+    cartShow()
+    iconsEvent()
+    addCarrito(db)
+    drawCarrito(db)
+}
+
+
+window.addEventListener('load', main)
