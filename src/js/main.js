@@ -47,7 +47,7 @@ async function main(){
 
     const db= {
         products: JSON.parse(window.localStorage.getItem('products')) || (await getElements()),
-        cart: JSON.parse(window.localStorage.getItem('cart')) ||{},
+        cart: JSON.parse(window.localStorage.getItem('cart')) || {},
 
     };
     
@@ -105,7 +105,7 @@ function addCarrito(db) {
             window.localStorage.setItem('cart', JSON.stringify(db.cart))
         }
 
-        
+        drawCarrito(db)
     })
 }
 
@@ -122,7 +122,7 @@ function drawCarrito(db){
 
         html += `
 
-            <div class="carrito__product" id='${id}' >
+            <div class="carrito__product" id='${id}'>
                 <div class="carrito__product--img">
                     <img src='${image}' alt='image'>
                 </div>
