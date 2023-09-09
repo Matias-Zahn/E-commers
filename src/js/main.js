@@ -29,7 +29,7 @@ function paintProducts(db){
 
             <div class='product__info'>
 
-                <h3>$${product.price} <span>Stock: ${product.quantity}</span></h3>
+                <h3>$${product.price} | <span>Stock: ${product.quantity}</span></h3>
                 <h4>${product.name}</h4>
             </div>
         </div>
