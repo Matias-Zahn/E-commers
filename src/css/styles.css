@@ -321,13 +321,12 @@ footer{
 }
 
 .information{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    
-
+    display: flex;
+    justify-content: space-evenly;
     .about__us{
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: .3rem;
     }
 }
@@ -444,6 +443,78 @@ footer{
     gap: .5rem;
 }
 
+
+
+/* LightMOde */
+
+
+.light__mode{
+    background-color: #f5f5f5;
+    
+    *{
+        color: #000;
+        fill: #000 ;
+
+    }
+    
+    header{
+        background-color: var(--letters-ccc);
+    }
+
+
+    .presentation__img{
+        background-color: var(--bg--compl);
+
+        img{
+            background-color: var(--bg--compl);
+        }
+    }
+    
+
+    .btn__showmore{
+        background-color: var(--letters-ccc);
+        border: 2px solid #000;
+        
+    }
+
+    .btn__showmore:hover{
+        background-color: var(--bg--compl);
+    }
+
+    .product{
+        background-color: var(--letters-ccc);
+        
+        .product__info{
+            background-color: var(--letters-ccc);
+
+        }
+    }
+
+    footer{
+        background-color: var(--letters-ccc);
+
+        .bxl-facebook-circle,
+        .bxl-instagram{
+            fill: #000;
+        }
+
+        .information__github,
+        .information__API{
+            background-color: var(--letters-color);
+        }
+    }
+
+
+    .carrito__show{
+        background-color: var(--letters-ccc);
+
+        .carrito__product{
+            background-color: transparent;
+            border: 5px solid #000;
+        }
+
+    }
+}
 
 
 

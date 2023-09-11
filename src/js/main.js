@@ -129,7 +129,7 @@ function drawCarrito(db){
                         <i class='bx bx-minus'></i>
                         <p> ${amount} Unit</p>
                         <i class='bx bx-plus'></i>
-                        <i class='bx bxs-trash' style='color:#ffffff' ></i>
+                        <i class='bx bxs-trash'></i>
                     </div>
                 </div>
             </div>   
@@ -145,7 +145,7 @@ function darkMode() {
     const bxsmoon= document.querySelector('.bxs-moon');
 
     bxsmoon.addEventListener('click', () => {
-        
+        document.body.classList.toggle('light__mode')
     })
 }
 
@@ -163,6 +163,7 @@ async function main(){
     iconsEvent()
     addCarrito(db)
     drawCarrito(db)
+    darkMode()
 }
 
 
