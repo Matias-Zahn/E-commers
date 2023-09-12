@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./src/css/styles.css">
     <script src="./src/js/main.js" defer></script>
 </head>
-<body class="light__mode">
+<body>
 
     <header>
 
@@ -40,6 +40,7 @@
             
 
             <div class="navbar__icons">
+                <i class='bx bxs-sun'></i>
                 <i class='bx bxs-moon'></i>
                 <i class='bx bxs-cart-add' ></i>
                 <i class='bx bx-menu' ></i>
@@ -124,9 +125,15 @@
 
     <div class="carrito">
         <i class='bx bxs-arrow-from-left'></i>
+        
         <div class="carrito__products"></div>
         <div class="carrito__price">
-            
+            <div class="info__compra">
+                <span class="info__compra--amount"></span>
+                <span class="info__compra--total"></span>
+            </div>
+
+            <button class="btn__buy">Comprar</button>
         </div>
     </div>
 </body>

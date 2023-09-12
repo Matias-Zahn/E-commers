@@ -7,6 +7,7 @@
     --bg--compl: #FAEF11;
     --letters-color: #f5f5f5;
     --footer-bg: rgb(51, 8, 8);
+    --black--letters: #000;
     --letters-ccc: #ccc;
     --max-W: 1000px
 }
@@ -144,7 +145,8 @@ header{
 }
 
 
-.navbar__menu{
+.navbar__menu,
+.bxs-sun{
     display: none;
 }
 
@@ -367,15 +369,22 @@ footer{
     right: 0;
     z-index: 3000;
 
-    height: 100vh;
+    height: calc(100vh);
     width: 400px;
     background-color:var(--bg--products);
 
     top: 100%;
     transition: top 0.3s;
-    overflow-y: scroll;
+
     padding: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
+
+
+
 
 .carrito .bxs-arrow-from-left{
     font-size: 1.5rem;
@@ -393,13 +402,16 @@ footer{
 
 
 
+
 .carrito__products{
+    height: 85%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 1rem;
     padding: 2rem;
 
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .carrito__product{
@@ -410,17 +422,9 @@ footer{
     border-radius: 1rem;
     border: 1px solid var(--bg--compl);
 
-    height: 75%;
 
     
 }
-
-.carrito__price{
-    height: 15%;
-    background-color: red;
-    
-}
-
 
 
 .carrito__product--img{
@@ -436,13 +440,48 @@ footer{
 }
 
 
-
-
 .carrito__icons{
     display: flex;
     gap: .5rem;
 }
 
+
+/* Seccion COmprar */
+
+.carrito__price{
+    height: 15%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.carrito__price:last-child{
+    justify-content: end;
+}
+
+.info__compra{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn__buy{
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--footer-bg);
+    background-color: var(--bg--compl);
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn__buy:hover{
+    background-color: var(--black--letters);
+    color: var(--letters-color);
+}
 
 
 /* LightMOde */
@@ -451,6 +490,19 @@ footer{
 .light__mode{
     background-color: #f5f5f5;
     
+    .bxs-sun{
+        display: flex;
+    }
+
+    .bxs-moon{
+        display: none;
+    }
+
+    .navbar__icons{
+        display: flex;
+        gap: .5rem;
+    }
+
     *{
         color: #000;
         fill: #000 ;
@@ -503,7 +555,13 @@ footer{
             background-color: var(--letters-color);
         }
     }
+    .carrito{
+        background-color: var(--letters-ccc);
+    }
 
+    .carrito__product{
+        background-color: var(--letters-ccc);
+    }
 
     .carrito__show{
         background-color: var(--letters-ccc);
@@ -513,6 +571,10 @@ footer{
             border: 5px solid #000;
         }
 
+    }
+
+    .cart{
+        background-color: var(--letters-ccc);
     }
 }
 

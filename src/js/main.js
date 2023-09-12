@@ -101,6 +101,7 @@ function addCarrito(db) {
         }
 
         drawCarrito(db)
+        infoComprar(db)
     })
 }
 
@@ -117,15 +118,15 @@ function drawCarrito(db){
 
         html += `
 
-            <div class="carrito__product" id='${id}'>
+            <div class="carrito__product">
                 <div class="carrito__product--img">
                     <img src='${image}' alt='image'>
                 </div>
                 <div class='carrito__product--info'>
                     <h5>${name}</h5>
                     <p>Stock: ${quantity} | $${price}</p>
-                    <h4>Subtiotal: $${price} </h4>
-                    <div class="carrito__icons">
+                    <h4>Subtotal: $${price * amount} </h4>
+                    <div class="carrito__icons" id='${id}'>
                         <i class='bx bx-minus'></i>
                         <p> ${amount} Unit</p>
                         <i class='bx bx-plus'></i>
@@ -142,13 +143,110 @@ function drawCarrito(db){
 
 function darkMode() {
     
-    const bxsmoon= document.querySelector('.bxs-moon');
+    const dark= document.querySelector('.navbar__icons');
 
-    bxsmoon.addEventListener('click', () => {
-        document.body.classList.toggle('light__mode')
+    dark.addEventListener('click', (e) => {
+        if (e.target.classList.contains('bxs-moon')){
+            document.body.classList.add('light__mode')
+            
+            
+        }
+
+        if(e.target.classList.contains('bxs-sun')){
+            document.body.classList.remove('light__mode')
+        }
     })
 }
 
+
+function deleteProducts(db) {
+    
+    const cartProduct= document.querySelector('.carrito__products')
+
+    cartProduct.addEventListener('click', e =>{
+        if (e.target.classList.contains('bx-plus')){
+            const id= Number(e.target.parentElement.id)
+
+            const productFind= db.products.find((product) => product.id === id)
+            if(productFind.quantity === db.cart[productFind.id].amount) return alert('No tenemos mas en Stock')
+
+            db.cart[id].amount++
+        }
+        if (e.target.classList.contains('bx-minus')){
+            const id= Number(e.target.parentElement.id)
+
+            if(db.cart[id].amount === 1){
+
+                const response= confirm('¿Estas seguro que deseas eliminar el producto?')
+
+                if(!response) return
+                delete db.cart[id];
+            }else{
+                db.cart[id].amount--
+            }
+
+
+        }
+        if (e.target.classList.contains('bxs-trash')){
+            const id= Number(e.target.parentElement.id)
+            
+            delete db.cart[id];
+        }
+
+        window.localStorage.setItem('cart', JSON.stringify(db.cart));
+        drawCarrito(db);
+        infoComprar(db)
+    })
+}
+
+function infoComprar(db) {
+    const infoTotal= document.querySelector('.info__compra--total')
+    const infoAmount= document.querySelector('.info__compra--amount')
+
+    let infoT= 0;
+    let infoA= 0;
+
+    for (const product in db.cart) {
+        const {price, amount} = db.cart[product]
+        infoT += price * amount
+        infoA += amount
+    }
+
+    infoTotal.textContent= 'Total: $' + infoT +'. 00'
+    infoAmount.textContent= 'Cantidad ' + infoA
+}
+
+function btnComprar(db){
+    const btnComprar= document.querySelector('.btn__buy')
+
+    btnComprar.addEventListener('click', () => {
+
+        if(!Object.values(db.cart).length) return 
+
+        const response= confirm('¿Deseas comprar los siguentes productos?')
+        if (!response) return
+
+        const currentProducts= [];
+
+        for (const product of db.products) {
+            const productCart= db.cart[product.id]
+            if(product.id === productCart?.id){
+                currentProducts.push({
+                    ...product,
+                    quantity: product.quantity - productCart.amount
+                })
+            }else{
+                currentProducts.push(product)
+            }
+        }
+
+        db.products= currentProducts;
+        db.cart= {};
+
+        window.localStorage.setItem('products', JSON.stringify(db.products))
+        window.localStorage.setItem('cart', JSON.stringify(db.cart))
+    })
+}
 
 async function main(){
 
@@ -163,7 +261,10 @@ async function main(){
     iconsEvent()
     addCarrito(db)
     drawCarrito(db)
+    deleteProducts(db)
     darkMode()
+    infoComprar(db)
+    btnComprar(db)
 }
 
 
