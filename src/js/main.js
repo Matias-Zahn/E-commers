@@ -20,11 +20,12 @@ function paintProducts(db){
     const productsHTML= document.querySelector('.products');
 
     for (const product of db.products) {
+        const soldOut= product.quantity ? `<i class='bx bx-plus' id='${product.id}'></i>`: "<span class='soldOut' >Sold Out</span>"
         html += `
         <div class="product">
             <div class='product__img'>
                 <img src='${product.image}' alt='imagen-productos'>
-                <i class='bx bx-plus' id='${product.id}'></i>
+                ${soldOut}
             </div>
 
             <div class='product__info'>
@@ -102,6 +103,7 @@ function addCarrito(db) {
 
         drawCarrito(db)
         infoComprar(db)
+        addToCartIcon(db)
     })
 }
 
@@ -196,6 +198,7 @@ function deleteProducts(db) {
         window.localStorage.setItem('cart', JSON.stringify(db.cart));
         drawCarrito(db);
         infoComprar(db)
+        addToCartIcon(db)
     })
 }
 
@@ -245,6 +248,35 @@ function btnComprar(db){
 
         window.localStorage.setItem('products', JSON.stringify(db.products))
         window.localStorage.setItem('cart', JSON.stringify(db.cart))
+
+        infoComprar(db)
+        drawCarrito(db)
+        paintProducts(db)
+        addToCartIcon(db)
+    })
+}
+
+function addToCartIcon(db){
+
+    const amountIcon= document.querySelector('.amount__cart')
+
+    let amountCount= 0
+    for (const product in db.cart) {
+        amountCount += db.cart[product].amount
+    }
+    
+    amountIcon.textContent = amountCount
+}
+
+function animationNavbar(){
+
+    const Headeranimation= document.querySelector('.scroll__animation')
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 0){
+            Headeranimation.classList.add('supp__header--animation')
+        }else if(window.scrollY === 0){
+            Headeranimation.classList.remove('supp__header--animation');
+        }
     })
 }
 
@@ -265,6 +297,8 @@ async function main(){
     darkMode()
     infoComprar(db)
     btnComprar(db)
+    addToCartIcon(db)
+    animationNavbar()
 }
 
 
