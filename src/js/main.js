@@ -146,16 +146,21 @@ function drawCarrito(db){
 function darkMode() {
     
     const dark= document.querySelector('.navbar__icons');
+    const sun= document.querySelector('.bxs-sun')
+    const moon= document.querySelector('.bxs-moon')
 
     dark.addEventListener('click', (e) => {
         if (e.target.classList.contains('bxs-moon')){
             document.body.classList.add('light__mode')
-            
+            sun.style.display= 'flex'
+            moon.style.display= 'none'
             
         }
 
         if(e.target.classList.contains('bxs-sun')){
             document.body.classList.remove('light__mode')
+            sun.style.display= 'none'
+            moon.style.display= 'flex'
         }
     })
 }

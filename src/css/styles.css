@@ -6,10 +6,24 @@
     --bg--products: #342a45;
     --bg--compl: #FAEF11;
     --letters-color: #f5f5f5;
-    --footer-bg: rgb(51, 8, 8);
     --black--letters: #000;
     --letters-ccc: #ccc;
+    --letter--white: #fff;
+    --switch: #000;
+    --switch__yellow: #FAEF11;
     --max-W: 1000px
+}
+
+.light__mode {
+    --bg-color: #f5f5f5;
+    --bg--products: #ccc;
+    --bg--compl: #FAEF11;
+    --letters-color: #000;
+    --black--letters: #000;
+    --letters-ccc: #000;
+    --letter--white: #000;
+    --switch: #ffff;
+    --switch__yellow: #000;
 }
 
 html {
@@ -264,17 +278,15 @@ header{
 .logo{
     display: flex;
     align-items: center;
-
-    svg{
-        min-width: 40px;
-    }
-
-    span{
-        text-transform: uppercase;
-    }
 }
 
+.logo svg{
+    min-width: 40px;
+}
 
+.logo span{
+    text-transform: uppercase;
+}
 
 .amount__cart{
     width: 20px;
@@ -323,6 +335,7 @@ i{
 }
 
 .title__h1{
+    color: var(--letters-color);
     font-size: 3rem;
 }
 
@@ -331,16 +344,16 @@ i{
 }
 .description__price{
     font-size: 1.5rem;
-    color: var(--bg--compl);
+    color: var(--switch__yellow);
 }
 
 .btn__showmore{
-    background-color: #000;
+    background-color: var(--switch);
     width: 200px;
     padding: 1rem;
     font-size: 1.1rem;
     border: 1px solid var(--letters-color);
-
+    color: var(--letter--white);
     cursor: pointer;
 
     margin-bottom: 1rem;
@@ -410,7 +423,7 @@ i{
 /* Footer */
 
 footer{
-    background-color: #000;
+    background-color: var(--bg--products);
     padding: 3rem;
 
     display: grid;
@@ -436,7 +449,7 @@ footer{
 
     padding: .5rem;
     align-items: center;
-    background-color: var(--footer-bg);
+    background-color: var(--switch);
 
     a:hover{
         text-decoration: underline;
@@ -447,7 +460,7 @@ footer{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--footer-bg);
+    background-color: var(--switch);
     padding: 1rem;
 
     transition: background-color 0.3s;
@@ -516,7 +529,7 @@ footer{
     padding: 1rem;
     background-color: var(--bg-color);
     border-radius: 1rem;
-    border: 1px solid var(--bg--compl);
+    border: 2px solid var(--black--letters);
 
 
     
@@ -576,120 +589,10 @@ footer{
 
 .btn__buy:hover{
     background-color: var(--black--letters);
-    color: var(--letters-color);
+    color: var(--bg-color);
 }
 
 
-/* LightMOde */
-
-
-.light__mode{
-    background-color: #f5f5f5;
-
-    *{  
-        color: var(--black--letters);
-        fill: var(--black--letters);
-    }
-    
-    .bxs-sun{
-        display: flex;
-    }
-
-    .supp__header--animation{
-        height: 70px;
-        background-color: var(--letters-ccc);
-    
-        .bxs-cart-add{
-            color: var(--black--letters);
-        }
-    
-    }
-
-    .bxs-moon{
-        display: none;
-    }
-
-    .navbar__icons{
-        display: flex;
-        gap: .5rem;
-    }
-
-    
-    header{
-        background-color: transparent;
-    }
-
-
-    .presentation__img{
-        background-color: var(--bg--compl);
-
-        img{
-            background-color: var(--bg--compl);
-        }
-    }
-    
-
-    .btn__showmore{
-        background-color: var(--letters-ccc);
-        border: 2px solid #000;
-        
-    }
-
-    .btn__showmore:hover{
-        background-color: var(--bg--compl);
-    }
-
-    .product{
-        background-color: var(--letters-ccc);
-        
-        .product__info{
-            background-color: var(--letters-ccc);
-
-        }
-    }
-
-    .product__info span{
-        color: var(--black--letters);
-    }
-
-    footer{
-        background-color: var(--letters-ccc);
-
-        .bxl-facebook-circle,
-        .bxl-instagram{
-            fill: #000;
-        }
-
-        .information__github,
-        .information__API{
-            background-color: var(--letters-color);
-        }
-    }
-    .carrito{
-        background-color: var(--letters-ccc);
-    }
-
-    .carrito__product{
-        background-color: var(--letters-ccc);
-    }
-
-    .carrito__show{
-        background-color: var(--letters-ccc);
-
-        .carrito__product{
-            background-color: transparent;
-            border: 5px solid #000;
-        }
-
-    }
-
-    .cart{
-        background-color: var(--letters-ccc);
-    }
-}
-
-
-/* Animacion Navbar */
 
 
 
