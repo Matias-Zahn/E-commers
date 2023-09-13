@@ -337,7 +337,8 @@ header{
 .amount__cart{
     width: 20px;
     height: 20px;
-
+    font-size: 1rem;
+    
     border-radius: 50%;
     background-color: var(--bg--compl);
     color: var(--black--letters);
@@ -351,6 +352,8 @@ header{
 
     opacity: 0;
     overflow: hidden;
+
+    transition: opacity 0.5s, overflow 0.5s ;
 }
 
 .amount__cart--show{
@@ -487,14 +490,23 @@ footer{
 }
 
 .information{
-    display: flex;
-    justify-content: space-evenly;
-    .about__us{
+    display: grid;
+    gap: 1rem;
+    place-items: center;
+}
+
+@media (min-width: 768px) {
+    .information{
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: .3rem;
+        justify-content: space-evenly;
     }
+}
+
+.about__us{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
 }
 
 .information__github{
@@ -506,9 +518,12 @@ footer{
     align-items: center;
     background-color: var(--switch);
 
-    a:hover{
-        text-decoration: underline;
-    }
+    transition: background-color 0.3s, text-decoration 2s;
+}
+
+.information__github a:hover{
+    text-decoration: underline;
+    color: var(--bg--compl);
 }
 
 .information__API{
@@ -518,11 +533,13 @@ footer{
     background-color: var(--switch);
     padding: 1rem;
 
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, text-decoration 0.3s;
 
-    :hover{
-        text-decoration: underline;
-    }
+}
+
+.information__API a:hover{
+    text-decoration: underline;
+    color: var(--bg--compl);
 }
 
 /* CARRITO DE COMPRAS */
