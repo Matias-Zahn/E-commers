@@ -307,13 +307,16 @@ async function main(){
     animationNavbar()
 }
 
-
-
-window.addEventListener('load', () => {
+function loader(){
     const charge= document.querySelector('.loader');
 
     charge.classList.add('loaded')
+}
 
+
+window.addEventListener('load', () => {
+
+    setTimeout(loader, 500)
     main()
 })
 
