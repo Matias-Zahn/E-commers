@@ -67,6 +67,52 @@ img{
     cursor: pointer;
 }
 
+
+/* Pantalla de carga */
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black--letters);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.3s;
+    opacity: 1; /* La pantalla de carga es visible inicialmente */
+}
+
+.svg__load svg{
+    width: 200px;
+}
+
+.loading {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid var(--bg--compl);
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.loaded {
+    opacity: 0;
+    pointer-events: none; /* Evita que los elementos bajo la pantalla de carga sean interactivos */
+} 
+
+
 /* PRODUCTOS (API) */
 
 .products{
@@ -302,7 +348,16 @@ header{
     position: absolute;
     top: 13px;
     right: -12px;
+
+    opacity: 0;
+    overflow: hidden;
 }
+
+.amount__cart--show{
+    opacity: 1;
+    overflow: visible;
+}
+
 
 i{
     font-size: 1.3rem;
@@ -489,14 +544,14 @@ footer{
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
-
 
 
 
 .carrito .bxs-arrow-from-left{
     font-size: 1.5rem;
+    position: absolute;
+    left: 75%;
 }
 
 .carrito__show{
@@ -520,8 +575,11 @@ footer{
     padding: 2rem;
 
     overflow: hidden;
-    overflow-y: scroll;
+
+    overflow-y:auto;
 }
+
+
 
 .carrito__product{
     display: flex;
@@ -579,7 +637,7 @@ footer{
     text-transform: uppercase;
     font-weight: 700;
     color: var(--footer-bg);
-    background-color: var(--bg--compl);
+    background-color: var(--switch);
     border: none;
     cursor: pointer;
     padding: 1rem;
@@ -588,8 +646,8 @@ footer{
 }
 
 .btn__buy:hover{
-    background-color: var(--black--letters);
-    color: var(--bg-color);
+    background-color: var(--bg--compl);
+    color: var(--black--letters);
 }
 
 

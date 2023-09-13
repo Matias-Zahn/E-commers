@@ -269,7 +269,8 @@ function addToCartIcon(db){
     for (const product in db.cart) {
         amountCount += db.cart[product].amount
     }
-    
+    if (amountCount) amountIcon.classList.add('amount__cart--show')
+    if (amountCount === 0) amountIcon.classList.remove('amount__cart--show')
     amountIcon.textContent = amountCount
 }
 
@@ -307,4 +308,10 @@ async function main(){
 }
 
 
+
+window.addEventListener('load', () => {
+    const charge= document.querySelector('.loader');
+
+    charge.classList.add('loaded')
+})
 window.addEventListener('load', main)
