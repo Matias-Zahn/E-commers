@@ -313,5 +313,6 @@ window.addEventListener('load', () => {
     const charge= document.querySelector('.loader');
 
     charge.classList.add('loaded')
+
+    main()
 })
-window.addEventListener('load', main)
