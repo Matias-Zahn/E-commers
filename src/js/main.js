@@ -22,7 +22,7 @@ function paintProducts(db){
     for (const product of db.products) {
         const soldOut= product.quantity ? `<i class='bx bx-plus' id='${product.id}'></i>`: "<span class='soldOut' >Sold Out</span>"
         html += `
-        <div class="product">
+        <div class="product active">
             <div class='product__img'>
                 <img src='${product.image}' alt='imagen-productos'>
                 ${soldOut}
@@ -31,7 +31,7 @@ function paintProducts(db){
             <div class='product__info'>
 
                 <h3>$${product.price} | <span>Stock: ${product.quantity}</span></h3>
-                <h4>${product.name}</h4>
+                <h4 class='nameProduct' id='${product.id}'>${product.name}</h4>
             </div>
         </div>
         `;
@@ -88,7 +88,6 @@ function addCarrito(db) {
         if (e.target.classList.contains('bx-plus')){
 
             const id= Number(e.target.id);
-
             const productFind= db.products.find((product) => product.id === id)
 
             if (db.cart[productFind.id]) {
@@ -104,6 +103,83 @@ function addCarrito(db) {
         drawCarrito(db)
         infoComprar(db)
         addToCartIcon(db)
+        descriptionProduct(db)
+    })
+}
+
+function descriptionProduct(db) {
+    
+    const productsHTML= document.querySelector('.products');
+    const aboutProducts= document.querySelector('.about__products')
+    const productsDescription= document.querySelector('.products__description')
+
+    productsHTML.addEventListener('click', (e) => {
+        if (e.target.classList.contains('nameProduct')) {
+            aboutProducts.classList.add('about__products--show')
+
+            const id= Number(e.target.id)
+
+            const productFind= db.products.find((product) => product.id === id)
+
+            let html= '';
+
+            html += `
+                <div class="description__product">
+                    <i class='bx bxs-arrow-from-left'></i>
+                    <div class="description__product--img">
+                        <img src='${productFind.image}' alt='image'>
+                    </div>
+                    
+                    <div class="description__product--text">
+                        <h4>${productFind.name}</h4>
+                        <p>${productFind.description}</p>
+                    </div>
+                    <div class="description__product--price">
+                        <div class="product__price">
+                            <h5>Precio: $${productFind.price}</h5>
+                            <i class='bx bx-plus'id='${productFind.id}'></i>
+                        </div>
+                        <div class="product__quantity">
+                            <p>Stock: ${ productFind.quantity}</p>
+                        </div>
+                    </div>
+                </div>
+                `
+
+            productsDescription.innerHTML=html
+        }
+
+        
+    })
+}
+
+function InteractivitiDescription(db) {
+    const productsDescription= document.querySelector('.products__description');
+    const aboutProducts= document.querySelector('.about__products')
+    productsDescription.addEventListener('click', (e) =>{
+        if (e.target.classList.contains('bxs-arrow-from-left')) {
+            aboutProducts.classList.remove('about__products--show')
+        }
+
+        if (e.target.classList.contains('bx-plus')){
+
+            const id= Number(e.target.id);
+            const productFind= db.products.find((product) => product.id === id)
+
+            if (db.cart[productFind.id]) {
+                if(productFind.quantity === db.cart[productFind.id].amount) return alert('No tenemos mas en Stock')
+                db.cart[productFind.id].amount++;
+            } else{
+                db.cart[productFind.id] = {...productFind, amount: 1};
+            }
+
+            window.localStorage.setItem('cart', JSON.stringify(db.cart))
+        }
+
+        drawCarrito(db)
+        infoComprar(db)
+        addToCartIcon(db)
+        descriptionProduct(db)
     })
 }
 
@@ -286,13 +362,67 @@ function animationNavbar(){
     })
 }
 
+
+function filter(db) {
+    const buttonFilter = document.querySelector('.filter');
+
+    const productosHTML= document.querySelector('.products')
+    
+    buttonFilter.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn__filter')) {
+            const category = e.target.getAttribute('category');
+            const filteredProducts = db.products.filter(product => product.category === category);
+            
+            productosHTML.innerHTML='';
+
+            let html='';
+
+            for (const product of filteredProducts) {
+                const soldOut= product.quantity ? `<i class='bx bx-plus' id='${product.id}'></i>`: "<span class='soldOut' >Sold Out</span>"
+                html += `
+                <div class="product product__animation">
+                    <div class='product__img'>
+                        <img src='${product.image}' alt='imagen-productos'>
+                        ${soldOut}
+                    </div>
+        
+                    <div class='product__info'>
+        
+                        <h3>$${product.price} | <span>Stock: ${product.quantity}</span></h3>
+                        <h4 class='nameProduct' id='${product.id}'>${product.name}</h4>
+                    </div>
+                </div>
+                `
+            }
+
+            productosHTML.innerHTML=html
+            
+            setTimeout(() => {
+                const newProducts = productosHTML.querySelectorAll('.product');
+                newProducts.forEach(product => product.classList.add('animation'));
+            }, 0);
+        }
+
+        if(e.target.classList.contains('reset')){
+            paintProducts(db)
+        }
+    });
+}
+
+function loader(){
+    const charge= document.querySelector('.loader');
+
+    charge.classList.add('loaded')
+}
+
 async function main(){
 
     const db= {
         products: JSON.parse(window.localStorage.getItem('products')) || (await getElements()),
         cart: JSON.parse(window.localStorage.getItem('cart')) || {},
-
+        
     };
+
     
     paintProducts(db)
     cartShow()
@@ -305,14 +435,11 @@ async function main(){
     btnComprar(db)
     addToCartIcon(db)
     animationNavbar()
+    descriptionProduct(db)
+    InteractivitiDescription(db)
+    filter(db) 
+    
 }
-
-function loader(){
-    const charge= document.querySelector('.loader');
-
-    charge.classList.add('loaded')
-}
-
 
 window.addEventListener('load', () => {
 
